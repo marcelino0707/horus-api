@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('username')->unique();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->dateTime('tanggal_daftar');
+        Schema::create('personal_refresh_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('user_id');
+            $table->longText('refresh_token');
+            $table->timestamp('expired_at');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('personal_refresh_tokens');
     }
 };

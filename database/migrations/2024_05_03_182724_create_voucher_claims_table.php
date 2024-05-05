@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('username')->unique();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->dateTime('tanggal_daftar');
+        Schema::create('voucher_claims', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('id_voucher');
+            $table->uuid('id_user');
+            $table->dateTime('tanggal_claim');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('voucher_claims');
     }
 };
