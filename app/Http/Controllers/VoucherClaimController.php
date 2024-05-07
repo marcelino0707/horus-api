@@ -81,4 +81,20 @@ class VoucherClaimController extends Controller
             'list_category' => $listCategory
         ]);
     }
+
+    public function destroy($id)
+    {
+        $user = auth()->user();
+
+        $existVoucher = VoucherClaim::where([['id_voucher', $id],['id_user', $user->id]])->first();
+        
+        if (!$existVoucher) {
+            return response()->json(['message' => 'Vouchers are not available'], 404);
+        }
+
+        $existVoucher->delete();
+
+        $response['message'] = "Voucher has been successfully removed";
+        return response()->json($response, 200);
+    }
 }

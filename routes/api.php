@@ -25,4 +25,5 @@ Route::group([
     Route::get('voucher', [VoucherController::class, 'index']);
     Route::get('history', [VoucherClaimController::class, 'index']);
     Route::post('voucher-claim', [VoucherClaimController::class, 'store']);
+    Route::delete('voucher-claim/{id}', [VoucherClaimController::class, 'destroy']);
 });
